@@ -132,6 +132,15 @@ figcaption { margin-top: 10px; font-size: 13px; color: var(--muted); }
 
 #savestatus { position: fixed; bottom: 16px; left: 16px; background: var(--ink); color: var(--bg); font-size: 12px; padding: 7px 14px; border-radius: 999px; z-index: 50; box-shadow: var(--shadow); }
 
+#admin-bar { position: fixed; top: 16px; left: 16px; z-index: 50; display: flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: 999px; padding: 6px 8px; font-size: 12.5px; }
+#admin-bar button { all: unset; cursor: pointer; font-family: var(--font-body); font-size: 12.5px; padding: 5px 10px; border-radius: 999px; color: var(--muted); }
+#admin-bar button:hover { background: var(--bg); color: var(--ink); }
+#admin-bar button.primary { background: var(--accent); color: var(--on-accent); }
+#admin-bar button.primary:hover { opacity: .9; background: var(--accent); color: var(--on-accent); }
+#admin-bar input[type="password"] { font-family: var(--font-body); font-size: 12.5px; border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; background: var(--bg); color: var(--ink); width: 110px; }
+#admin-bar .admin-badge { padding: 5px 10px; color: var(--bb-honey); font-weight: 600; white-space: nowrap; }
+#admin-bar[hidden] { display: none; }
+
 footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -160,7 +169,7 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
     <span>To Do Productions × באבו בר</span>
   </div>
   <h1>ארכיטקטורת הכוורת</h1>
-  <p>תרשים אתר מעודכן ומסעות משתמש לכל הפרסונות, בהתבסס על מסמך ההעברה. הכרטיסים נמכרים באתר ספק חיצוני, לא באתר הזה — ונתיב <code>/checkout</code> הוסר בהתאם. הכוורת, עץ האתר ומסעות המשתמש למטה ניתנים לעריכה מלאה.</p>
+  <p>תרשים אתר מעודכן ומסעות משתמש לכל הפרסונות, בהתבסס על מסמך ההעברה. הכרטיסים נמכרים באתר ספק חיצוני, לא באתר הזה — ונתיב <code>/checkout</code> הוסר בהתאם. הכוורת, עץ האתר ומסעות המשתמש ניתנים לעריכה על ידי מנהל מחובר בלבד; מבקרים צופים בלבד.</p>
   <dl class="facts">
     <div><dt>פרסונות</dt><dd>6</dd></div>
     <div><dt>נושאי כוורת</dt><dd>6 + מרכז מוכר</dd></div>
@@ -189,15 +198,15 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
   <div class="section-head" style="margin-bottom:18px">
     <div class="eyebrow"><span>דף הבית</span></div>
     <h2>הכוורת — 6 נושאים</h2>
-    <p>המרכז מוכר ולא רק מנווט. לחצו על כל תווית כדי לערוך אותה; הבחירה למטה קובעת איזה משושה מודגש כפאקג׳.</p>
+    <p>המרכז מוכר ולא רק מנווט. <span id="hive-hint" hidden>לחצו על כל תווית כדי לערוך אותה; הבחירה למטה קובעת איזה פריט מודגש כפאקג׳.</span></p>
   </div>
   <figure>
     <div class="frame">
       <div class="bar"><i></i><i></i><i></i><span>/ · דף הבית</span></div>
       <div class="pad">
         <div class="scroll"><div class="hive-editor" id="hive-editor"></div></div>
-        <div class="hive-controls">
-          <span>משושה מודגש (מוכר כפול):</span>
+        <div class="hive-controls" id="hive-controls" hidden>
+          <span>פריט מודגש (מוכר כפול):</span>
           <select id="hive-accent-select"></select>
         </div>
       </div>
@@ -212,7 +221,7 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
     <h2>עץ האתר, אחרי הכוורת</h2>
     <p>6 הענפים הראשיים תואמים את 6 נושאי הכוורת. הכרטיסים יוצאים מהאתר; <code>/checkout</code> בוטל.</p>
   </div>
-  <p class="hint">כל תיבה ניתנת לעריכה. + מוסיף תת-עמוד, ● מחליף סגנון (רגיל · מודגש · חיצוני · בוטל), →/← מזיזים בין אחים, ✕ מוחק (כולל תתי-עמודים מתחתיו).</p>
+  <p class="hint" id="tree-hint" hidden>כל תיבה ניתנת לעריכה. + מוסיף תת-עמוד, ● מחליף סגנון (רגיל · מודגש · חיצוני · בוטל), →/← מזיזים בין אחים, ✕ מוחק (כולל תתי-עמודים מתחתיו).</p>
   <figure>
     <div class="frame">
       <div class="bar"><i></i><i></i><i></i><span>/ · מפת אתר מלאה</span></div>
@@ -230,7 +239,7 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
     <h2>שש פרסונות</h2>
     <p>חמש פרסונות חוץ ופרסונה פנימית אחת (ניהול תוכן), כל אחת עם מטרה אחרת באותו אתר.</p>
   </div>
-  <p class="hint">כל טקסט ניתן לעריכה בלחיצה. בכל שלב: → / ← להזזה, ● להחלפת סגנון (רגיל · חיצוני · מודגש), ✕ למחיקה. "+ הוסף שלב" מוסיף שלב בסוף המסע.</p>
+  <p class="hint" id="personas-hint" hidden>כל טקסט ניתן לעריכה בלחיצה. בכל שלב: → / ← להזזה, ● להחלפת סגנון (רגיל · חיצוני · מודגש), ✕ למחיקה. "+ הוסף שלב" מוסיף שלב בסוף המסע.</p>
   <div class="personas" id="personas"></div>
 </section>
 
@@ -246,15 +255,44 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
 
 <footer>מבוסס על HANDOVER.md · סטטוס: ארכיטקטורה בבדיקת הלקוח · עיצוב גרפי ו-UI חזותי — שלב נפרד, לא כלול כאן. עריכות נשמרות אוטומטית (בדפדפן זה תמיד, ובאתר Claude כשזמין).</footer>
 
-</main>
-
 <div id="savestatus" hidden></div>
 
-<script>
+<div id="admin-bar">
+  <span id="admin-viewer-badge">מצב צפייה</span>
+  <button type="button" id="admin-lock-btn">🔒 כניסת מנהל</button>
+  <span id="admin-login-form" hidden>
+    <input type="password" id="admin-pass" placeholder="סיסמה" autocomplete="off">
+    <button type="button" class="primary" id="admin-login-submit">כניסה</button>
+    <button type="button" id="admin-login-cancel">ביטול</button>
+  </span>
+  <span id="admin-unlocked-bar" hidden>
+    <span class="admin-badge" id="admin-badge-text">🔓 מצב עריכה</span>
+    <button type="button" id="admin-save-now">שמור עכשיו</button>
+    <button type="button" id="admin-logout">יציאה</button>
+  </span>
+</div>
+
+</main>
+
+<script id="appscript">
 (function(){
   'use strict';
   var NS = 'http://www.w3.org/2000/svg';
   var LS_KEY = 'babu-bar-hive-state-v1';
+  var ADMIN_LS_KEY = 'babu-bar-admin-v1';
+  var ADMIN_CREDS = [
+    { label:'Yaniv', hash:'824c33535169682d27e2a48dac5b8a3a5604229252ec1faeb00f598a13d7c61a' },
+    { label:'Alon', hash:'321e134dff726794dec7f97742509309f943c85560a6faa3a58dff37c58e0424' }
+  ];
+  var ADMIN = false;
+  var ADMIN_LABEL = '';
+
+  function sha256Hex(str){
+    if(!(window.crypto && window.crypto.subtle)) return Promise.reject(new Error('no-subtle-crypto'));
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(function(buf){
+      return Array.prototype.map.call(new Uint8Array(buf), function(b){ return b.toString(16).padStart(2, '0'); }).join('');
+    });
+  }
 
   var STATE = {
     hive: {
@@ -263,7 +301,7 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
       accentIndex: 3
     },
     tree: [
-      { id:'t0', parent:null, t:'דף הבית', s:'/ · 7 משושים (הכוורת)', y:'n' },
+      { id:'t0', parent:null, t:'דף הבית', s:'/ · הכוורת (מרכז + 6)', y:'n' },
       { id:'t1', parent:'t0', t:'המופעים', s:'/shows', y:'n' },
       { id:'t2', parent:'t0', t:'לוח הופעות', s:'/calendar', y:'n' },
       { id:'t3', parent:'t0', t:'אירועים פרטיים', s:'/private-events', y:'n' },
@@ -336,6 +374,14 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
   };
 
   try {
+    var stateTag = document.getElementById('state-data');
+    if(stateTag && stateTag.textContent.trim()){
+      var fromTag = JSON.parse(stateTag.textContent);
+      if(fromTag && fromTag.flows && fromTag.tree && fromTag.hive) STATE = fromTag;
+    }
+  } catch(eTag){}
+
+  try {
     var saved = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
     if(saved && saved.flows && saved.tree && saved.hive) STATE = saved;
   } catch(e0){}
@@ -345,35 +391,40 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
   /* ================= personas ================= */
   function stepBox(fi, st, si, isLast){
     var cls = st.y === 'x' ? 'x' : st.y === 'a' ? 'a' : 'n';
-    var html =
-      '<div class="sbox ' + cls + '" data-fi="' + fi + '" data-si="' + si + '">' +
+    var ce = ADMIN ? ' contenteditable="true"' : '';
+    var html = '<div class="sbox ' + cls + '" data-fi="' + fi + '" data-si="' + si + '">';
+    if(ADMIN){
+      html +=
         '<div class="sbox-tools">' +
           '<button type="button" data-act="right" aria-label="הזז ימינה">→</button>' +
           '<button type="button" data-act="left" aria-label="הזז שמאלה">←</button>' +
           '<button type="button" data-act="style" aria-label="החלף סגנון">●</button>' +
           '<button type="button" data-act="del" aria-label="מחק שלב">✕</button>' +
-        '</div>' +
-        '<div class="sbox-t" contenteditable="true" data-field="t">' + esc(st.t) + '</div>' +
-        '<div class="sbox-s" contenteditable="true" data-field="s">' + esc(st.s) + '</div>' +
+        '</div>';
+    }
+    html +=
+        '<div class="sbox-t"' + ce + ' data-field="t">' + esc(st.t) + '</div>' +
+        '<div class="sbox-s"' + ce + ' data-field="s">' + esc(st.s) + '</div>' +
       '</div>';
     if(!isLast) html += '<div class="sarrow" aria-hidden="true">←</div>';
     return html;
   }
 
   function flowCard(f, fi){
+    var ce = ADMIN ? ' contenteditable="true"' : '';
     var steps = f.steps.map(function(st, si){ return stepBox(fi, st, si, si === f.steps.length - 1); }).join('');
-    steps += '<button type="button" class="sadd" data-act="add" data-fi="' + fi + '">+ הוסף שלב</button>';
+    if(ADMIN) steps += '<button type="button" class="sadd" data-act="add" data-fi="' + fi + '">+ הוסף שלב</button>';
     return (
       '<div class="persona' + (f.internal ? ' internal' : '') + '" data-fi="' + fi + '">' +
         '<div class="persona-head">' +
           '<span class="persona-title-group">' +
             '<span class="persona-num">' + String(fi + 1).padStart(2, '0') + '</span>' +
-            '<span class="persona-name" contenteditable="true" data-field="name">' + esc(f.name) + '</span>' +
+            '<span class="persona-name"' + ce + ' data-field="name">' + esc(f.name) + '</span>' +
           '</span>' +
-          '<span class="persona-goal" contenteditable="true" data-field="goal">' + esc(f.goal) + '</span>' +
+          '<span class="persona-goal"' + ce + ' data-field="goal">' + esc(f.goal) + '</span>' +
         '</div>' +
         '<div class="frame">' +
-          '<div class="bar"><i></i><i></i><i></i><span contenteditable="true" data-field="route">' + esc(f.route) + '</span></div>' +
+          '<div class="bar"><i></i><i></i><i></i><span' + ce + ' data-field="route">' + esc(f.route) + '</span></div>' +
           '<div class="scroll pad"><div class="strip">' + steps + '</div></div>' +
         '</div>' +
       '</div>'
@@ -431,39 +482,39 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
   });
 
   /* ================= hive ================= */
-  var HIVE_POS = [[212,67],[254,140],[212,213],[128,213],[86,140],[128,67]];
+  var HIVE_POS = [[170,45],[252,93],[252,187],[170,235],[88,187],[88,93]];
   var hiveEl = document.getElementById('hive-editor');
   var hiveSelectEl = document.getElementById('hive-accent-select');
 
-  function hexPts(cx, cy, r){
-    var pts = [[cx + r, cy], [cx + r / 2, cy + r * 0.866], [cx - r / 2, cy + r * 0.866],
-      [cx - r, cy], [cx - r / 2, cy - r * 0.866], [cx + r / 2, cy - r * 0.866]];
-    return pts.map(function(p){ return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ');
-  }
-
   function renderHive(){
-    var r = 40, cx = 170, cy = 140;
+    var cx = 170, cy = 140, cr = 42, rw = 96, rh = 44;
     var svg = '<svg viewBox="0 0 340 280" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" aria-hidden="true">';
-    svg += '<polygon points="' + hexPts(cx, cy, r) + '" fill="var(--accent)" stroke="var(--accent)" stroke-width="2"/>';
+    STATE.hive.ring.forEach(function(txt, i){
+      var p = HIVE_POS[i];
+      svg += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0] + '" y2="' + p[1] + '" stroke="var(--line)" stroke-width="1.5"/>';
+    });
+    svg += '<circle cx="' + cx + '" cy="' + cy + '" r="' + cr + '" fill="var(--accent)" stroke="var(--accent)" stroke-width="2"/>';
     STATE.hive.ring.forEach(function(txt, i){
       var p = HIVE_POS[i];
       var accent = i === STATE.hive.accentIndex;
-      svg += '<polygon points="' + hexPts(p[0], p[1], r) + '" fill="' + (accent ? 'var(--bb-wine-soft)' : 'var(--surface)') + '" stroke="' + (accent ? 'var(--bb-wine)' : 'var(--accent)') + '" stroke-width="2"/>';
+      svg += '<rect x="' + (p[0] - rw / 2) + '" y="' + (p[1] - rh / 2) + '" width="' + rw + '" height="' + rh + '" rx="' + (rh / 2) + '" fill="' + (accent ? 'var(--bb-wine-soft)' : 'var(--surface)') + '" stroke="' + (accent ? 'var(--bb-wine)' : 'var(--accent)') + '" stroke-width="2"/>';
     });
     svg += '</svg>';
 
-    var html = '<div class="hexd center" style="left:' + (cx - 34) + 'px;top:' + (cy - 28) + 'px;width:68px;height:56px">' +
-      '<div class="ht" contenteditable="true" data-hex="c">' + esc(STATE.hive.center) + '</div></div>';
+    var ce = ADMIN ? ' contenteditable="true"' : '';
+    var html = '<div class="hexd center" style="left:' + (cx - 32) + 'px;top:' + (cy - 26) + 'px;width:64px;height:52px">' +
+      '<div class="ht"' + ce + ' data-hex="c">' + esc(STATE.hive.center) + '</div></div>';
     html += STATE.hive.ring.map(function(txt, i){
       var p = HIVE_POS[i];
       var cls = 'hexd' + (i === STATE.hive.accentIndex ? ' accent' : '');
-      return '<div class="' + cls + '" style="left:' + (p[0] - 34) + 'px;top:' + (p[1] - 28) + 'px;width:68px;height:56px">' +
-        '<div class="ht" contenteditable="true" data-hex="' + i + '">' + esc(txt) + '</div></div>';
+      return '<div class="' + cls + '" style="left:' + (p[0] - rw / 2 + 6) + 'px;top:' + (p[1] - rh / 2 + 2) + 'px;width:' + (rw - 12) + 'px;height:' + (rh - 4) + 'px">' +
+        '<div class="ht"' + ce + ' data-hex="' + i + '">' + esc(txt) + '</div></div>';
     }).join('');
     hiveEl.innerHTML = svg + html;
     hiveSelectEl.innerHTML = STATE.hive.ring.map(function(txt, i){
       return '<option value="' + i + '"' + (i === STATE.hive.accentIndex ? ' selected' : '') + '>' + esc(txt) + '</option>';
     }).join('');
+    document.getElementById('hive-controls').hidden = !ADMIN;
   }
 
   hiveEl.addEventListener('focusout', function(e){
@@ -503,19 +554,23 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
   function treeNodeHTML(n){
     var cls = 'tnode ' + (n.y || 'n');
     var isRoot = !n.parent;
-    var tools = '<div class="tnode-tools">' +
-      '<button type="button" data-tact="addchild" data-nid="' + n.id + '" aria-label="הוסף תת-עמוד">+</button>';
-    if(!isRoot){
-      tools +=
-        '<button type="button" data-tact="style" data-nid="' + n.id + '" aria-label="החלף סגנון">●</button>' +
-        '<button type="button" data-tact="right" data-nid="' + n.id + '" aria-label="הזז ימינה">→</button>' +
-        '<button type="button" data-tact="left" data-nid="' + n.id + '" aria-label="הזז שמאלה">←</button>' +
-        '<button type="button" data-tact="del" data-nid="' + n.id + '" aria-label="מחק עמוד">✕</button>';
+    var ce = ADMIN ? ' contenteditable="true"' : '';
+    var tools = '';
+    if(ADMIN){
+      tools = '<div class="tnode-tools">' +
+        '<button type="button" data-tact="addchild" data-nid="' + n.id + '" aria-label="הוסף תת-עמוד">+</button>';
+      if(!isRoot){
+        tools +=
+          '<button type="button" data-tact="style" data-nid="' + n.id + '" aria-label="החלף סגנון">●</button>' +
+          '<button type="button" data-tact="right" data-nid="' + n.id + '" aria-label="הזז ימינה">→</button>' +
+          '<button type="button" data-tact="left" data-nid="' + n.id + '" aria-label="הזז שמאלה">←</button>' +
+          '<button type="button" data-tact="del" data-nid="' + n.id + '" aria-label="מחק עמוד">✕</button>';
+      }
+      tools += '</div>';
     }
-    tools += '</div>';
     return '<div class="' + cls + '" data-nid="' + n.id + '">' + tools +
-      '<div class="tnode-t" contenteditable="true" data-field="t">' + esc(n.t) + '</div>' +
-      '<div class="tnode-s" contenteditable="true" data-field="s">' + esc(n.s || '') + '</div>' +
+      '<div class="tnode-t"' + ce + ' data-field="t">' + esc(n.t) + '</div>' +
+      '<div class="tnode-s"' + ce + ' data-field="s">' + esc(n.s || '') + '</div>' +
     '</div>';
   }
 
@@ -629,10 +684,79 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
     }
   });
 
-  renderPersonas();
-  renderHive();
-  renderTree();
+  function renderAll(){ renderPersonas(); renderHive(); renderTree(); }
+
+  renderAll();
   window.addEventListener('resize', function(){ drawTreeWires(); });
+
+  /* ================= admin lock ================= */
+  var lockBtn = document.getElementById('admin-lock-btn');
+  var loginForm = document.getElementById('admin-login-form');
+  var unlockedBar = document.getElementById('admin-unlocked-bar');
+  var viewerBadge = document.getElementById('admin-viewer-badge');
+  var passInput = document.getElementById('admin-pass');
+
+  function updateAdminUI(){
+    lockBtn.hidden = ADMIN || !loginForm.hidden;
+    viewerBadge.hidden = ADMIN;
+    unlockedBar.hidden = !ADMIN;
+    var badgeText = document.getElementById('admin-badge-text');
+    if(badgeText) badgeText.textContent = '🔓 מצב עריכה' + (ADMIN_LABEL ? ' · ' + ADMIN_LABEL : '');
+    ['tree-hint', 'personas-hint', 'hive-hint'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.hidden = !ADMIN;
+    });
+  }
+
+  function setAdmin(val){
+    ADMIN = val;
+    try {
+      if(val) localStorage.setItem(ADMIN_LS_KEY, ADMIN_LABEL || '1'); else localStorage.removeItem(ADMIN_LS_KEY);
+    } catch(e2){}
+    renderAll();
+    updateAdminUI();
+  }
+
+  lockBtn.addEventListener('click', function(){
+    loginForm.hidden = false;
+    lockBtn.hidden = true;
+    passInput.value = '';
+    passInput.focus();
+  });
+
+  document.getElementById('admin-login-cancel').addEventListener('click', function(){
+    loginForm.hidden = true;
+    lockBtn.hidden = false;
+  });
+
+  function tryLogin(){
+    var val = passInput.value;
+    sha256Hex(val).then(function(hex){
+      var match = ADMIN_CREDS.find(function(c){ return c.hash === hex; });
+      if(match){
+        ADMIN_LABEL = match.label;
+        loginForm.hidden = true;
+        setAdmin(true);
+      } else {
+        passInput.value = '';
+        passInput.placeholder = 'סיסמה שגויה';
+      }
+    }).catch(function(){
+      passInput.value = '';
+      passInput.placeholder = 'דף זה חייב https';
+    });
+  }
+  document.getElementById('admin-login-submit').addEventListener('click', tryLogin);
+  passInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); tryLogin(); } });
+
+  document.getElementById('admin-logout').addEventListener('click', function(){ setAdmin(false); });
+  document.getElementById('admin-save-now').addEventListener('click', function(){ doSave(); });
+
+  try {
+    var savedLabel = localStorage.getItem(ADMIN_LS_KEY);
+    if(savedLabel){ ADMIN = true; ADMIN_LABEL = savedLabel === '1' ? '' : savedLabel; renderAll(); }
+  } catch(e3){}
+  updateAdminUI();
 
   /* ================= save ================= */
   var statusEl = document.getElementById('savestatus');
@@ -647,6 +771,7 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
   var artifactNS = null;
 
   function scheduleSave(){
+    if(!ADMIN) return;
     clearTimeout(saveTimer);
     showStatus('שומר…');
     saveTimer = setTimeout(doSave, 1200);
@@ -661,8 +786,11 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
     var links = Array.prototype.map.call(document.querySelectorAll('link'), function(l){ return l.outerHTML; }).join('');
     var style = document.getElementById('s0').outerHTML;
     var main = document.querySelector('main.page').outerHTML;
+    var stateJson = JSON.stringify(STATE).replace(/</g, '\\u003c');
+    var stateTagHtml = '<script type="application/json" id="state-data">' + stateJson + '<' + '/script>';
+    var appScript = document.getElementById('appscript').outerHTML;
     var resetCss = ':root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px -apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}';
-    var doc = '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>' + resetCss + '</style></head><body>' + t + links + style + main + '</body></html>';
+    var doc = '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>' + resetCss + '</style></head><body>' + t + links + style + main + stateTagHtml + appScript + '</body></html>';
     artifactNS.publish(doc).then(function(){
       showStatus('נשמר ✓', true);
     }).catch(function(err){
@@ -673,6 +801,11 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
 
   if(window.claude && window.claude.use){
     window.claude.use('artifact').then(function(ns){ artifactNS = ns; }).catch(function(){});
+    window.claude.use('user').then(function(u){
+      if(!u) return;
+      var check = u.canEdit ? u.canEdit() : (u.isOwner ? Promise.resolve(u.isOwner()) : Promise.resolve(false));
+      Promise.resolve(check).then(function(can){ if(can) setAdmin(true); });
+    }).catch(function(){});
   }
 })();
 </script>
