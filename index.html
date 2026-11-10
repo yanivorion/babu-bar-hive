@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title id="t0">ארכיטקטורת הכוורת</title>
+<title id="t0">ארכיטקטורת הכוורת — באבו בר</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
@@ -167,15 +167,15 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
     <div class="mark" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"><polygon points="12,2 20,7 20,17 12,22 4,17 4,7"/></svg>
     </div>
-    <span>To Do Productions × באבו בר</span>
+    <span>באבו בר</span>
   </div>
   <h1>ארכיטקטורת הכוורת</h1>
-  <p>תרשים אתר מעודכן ומסעות משתמש לכל הפרסונות, בהתבסס על מסמך ההעברה. הכרטיסים נמכרים באתר ספק חיצוני, לא באתר הזה — ונתיב <code>/checkout</code> הוסר בהתאם. הכוורת, עץ האתר ומסעות המשתמש ניתנים לעריכה על ידי מנהל מחובר בלבד; מבקרים צופים בלבד.</p>
+  <p>תרשים אתר מעודכן ומסעות משתמש לכל הפרסונות, בהתבסס על מסמך ההעברה. זהו האתר של <b>באבו בר עצמו</b> — לא אתר תאגידי של To Do Productions עם באבו בר כאחד הענפים שלו; To Do Productions היא חברת ההפקה שמאחורי 5 המופעים, מוזכרת בעמודי המופעים בלבד. הכרטיסים נמכרים באתר ספק חיצוני, לא באתר הזה — ונתיב <code>/checkout</code> הוסר בהתאם. הכוורת, עץ האתר ומסעות המשתמש ניתנים לעריכה על ידי מנהל מחובר בלבד; מבקרים צופים בלבד.</p>
   <dl class="facts">
     <div><dt>פרסונות</dt><dd>6</dd></div>
     <div><dt>נושאי כוורת</dt><dd>6 + מרכז מוכר</dd></div>
-    <div><dt>מופעים</dt><dd>5</dd></div>
-    <div><dt>פלטה</dt><dd><span class="swatches" aria-hidden="true"><i style="background:var(--bb-honey)"></i><i style="background:var(--bb-wine)"></i></span>To Do × באבו בר</dd></div>
+    <div><dt>מופעים</dt><dd>5 · בהפקת To Do</dd></div>
+    <div><dt>פלטה</dt><dd><span class="swatches" aria-hidden="true"><i style="background:var(--bb-honey)"></i><i style="background:var(--bb-wine)"></i></span>באבו בר</dd></div>
     <div><dt>נתיב שהוסר</dt><dd class="mono">/checkout</dd></div>
   </dl>
 </header>
@@ -183,6 +183,8 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
 <section class="callout">
   <h3>מה השתנה לעומת הטיוטה הראשונה</h3>
   <ul>
+    <li><b>האתר הוא של באבו בר, לא של To Do Productions</b> — באבו בר הוא המותג המוביל של האתר; To Do היא חברת ההפקה מאחורי 5 המופעים, מוזכרת בעמודי המופע בלבד.</li>
+    <li><b>6 נושאי הכוורת עודכנו לפי שלט ה-QR האמיתי שבבאבו בר</b> — אותן שאלות שלקוחות שואלים בפועל (לוח, מופעים, אירוע פרטי, תפריט, תיוג ברשתות, קבוצת וואטסאפ), לא ניחוש. "באבו בר" הוסר כנושא כוורת נפרד — הוא כבר כל האתר.</li>
     <li><b>מכירת כרטיסים</b> — עוברת לאתר ספק חיצוני; האתר שלנו רק מפנה אליו מעמוד מופע ומלוח ההופעות.</li>
     <li><b>נתיב <code>/checkout</code> הוסר</b> — אין צורך בו יותר.</li>
     <li><b>הארכיטקטורה מאורגנת סביב 6 הנושאים של הכוורת</b> — עץ האתר נגזר מהם, לא מרשימת עמודים שטוחה.</li>
@@ -199,7 +201,7 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
   <div class="section-head" style="margin-bottom:18px">
     <div class="eyebrow"><span>דף הבית</span></div>
     <h2>הכוורת — 6 נושאים</h2>
-    <p>המרכז מוכר ולא רק מנווט. <span id="hive-hint" hidden>לחצו על כל תווית כדי לערוך אותה; הבחירה למטה קובעת איזה פריט מודגש כפאקג׳.</span></p>
+    <p>המרכז מוכר ולא רק מנווט. 6 הנושאים בטבעת מבוססים על שלט ה-QR האמיתי שתלוי בבאבו בר — השאלות שלקוחות באמת שואלים. <span id="hive-hint" hidden>לחצו על כל תווית כדי לערוך אותה; הבחירה למטה קובעת איזה פריט מודגש כפאקג׳.</span></p>
   </div>
   <figure>
     <div class="frame">
@@ -212,7 +214,7 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
         </div>
       </div>
     </div>
-    <figcaption>המופעים ← <code>/shows</code> · לוח הופעות ← <code>/calendar</code> · אירועים פרטיים ← <code>/private-events</code> · באבו בר ← <code>/babu-bar</code> · תפריט ← <code>/menu</code>.</figcaption>
+    <figcaption>המופעים ← <code>/shows</code> · לוח הופעות ← <code>/calendar</code> · אירועים פרטיים ← <code>/private-events</code> (מודגש — כאן נמכר פאקג׳ מופע+מקום) · תפריט ← <code>/menu</code> · רשתות חברתיות ← קישורי Instagram/Facebook · הצטרפות לוואטסאפ ← בלוק ניוזלטר בדף הבית.</figcaption>
   </figure>
 </section>
 
@@ -250,7 +252,7 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
     <li>איזה מופע הוא הדגל (flagship)?</li>
     <li>איזה ספק כרטיסים חיצוני, ועם אפשרות לקישור ישיר למופע/תאריך?</li>
     <li>פאקג׳ מופע+מקום — מחיר קבוע או הצעה בכל פעם?</li>
-    <li>באבו בר — מותג נפרד או תחת To Do?</li>
+    <li>לבאבו בר יש כבר לוגו/זהות חזותית קיימים לאתר, או שצריך עיצוב חדש?</li>
   </ul>
 </section>
 
@@ -298,25 +300,27 @@ footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--lin
   var STATE = {
     hive: {
       center: 'המופע הבא',
-      ring: ['המופעים','לוח הופעות','אירועים פרטיים','מופע + מקום','תפריט','באבו בר'],
-      accentIndex: 3
+      ring: ['המופעים','לוח הופעות','אירועים פרטיים','תפריט','רשתות חברתיות','קבוצת וואטסאפ'],
+      accentIndex: 2
     },
     tree: [
-      { id:'t0', parent:null, t:'דף הבית', s:'/ · הכוורת (מרכז + 6)', y:'n' },
+      { id:'t0', parent:null, t:'דף הבית', s:'/ · הכוורת (מרכז + 6) — באבו בר', y:'n' },
       { id:'t1', parent:'t0', t:'המופעים', s:'/shows', y:'n' },
       { id:'t2', parent:'t0', t:'לוח הופעות', s:'/calendar', y:'n' },
       { id:'t3', parent:'t0', t:'אירועים פרטיים', s:'/private-events', y:'n' },
-      { id:'t4', parent:'t0', t:'באבו בר', s:'/babu-bar', y:'n' },
+      { id:'t4', parent:'t0', t:'באבו בר (אודות)', s:'/babu-bar · אווירה, מיקום, שעות', y:'n' },
       { id:'t5', parent:'t0', t:'תפריט', s:'/menu · קבוע ל-QR', y:'n' },
-      { id:'t6', parent:'t0', t:'עמודים נוספים (פוטר)', s:'אודות · צור קשר · שו״ת · ⨉4 משפטיים', y:'n' },
-      { id:'t7', parent:'t1', t:'עמוד מופע (תבנית אחת)', s:'⨉5 · /shows/[slug]', y:'n' },
+      { id:'t6', parent:'t0', t:'עמודים נוספים (פוטר)', s:'צור קשר · שו״ת · ⨉4 משפטיים', y:'n' },
+      { id:'t7', parent:'t1', t:'עמוד מופע (תבנית אחת)', s:'⨉5 · /shows/[slug] · בהפקת To Do', y:'n' },
       { id:'t8', parent:'t3', t:'מופע פרטי', s:'…/show', y:'n' },
       { id:'t9', parent:'t3', t:'השכרת מקום', s:'…/venue-rental', y:'n' },
       { id:'t10', parent:'t3', t:'מופע + מקום', s:'הדגשה — מוכר כפול', y:'accent' },
       { id:'t11', parent:'t0', t:'אתר כרטיסים', s:'ספק חיצוני · מחוץ לאתר', y:'ext' },
-      { id:'t12', parent:'t0', t:'checkout/', s:'בוטל — כרטיסים נמכרים בחוץ', y:'ghost' }
+      { id:'t12', parent:'t0', t:'checkout/', s:'בוטל — כרטיסים נמכרים בחוץ', y:'ghost' },
+      { id:'t13', parent:'t0', t:'קבוצת וואטסאפ', s:'בלוק בדף הבית · הרשמה/הצטרפות', y:'n' },
+      { id:'t14', parent:'t4', t:'רשתות חברתיות', s:'Instagram/Facebook · קישור חוצה', y:'ext' }
     ],
-    nextTreeId: 13,
+    nextTreeId: 15,
     flows: [
       { name:'קהל מופעים', goal:'לקנות כרטיס למופע', route:'/shows/[slug] → ספק חיצוני',
         steps:[
